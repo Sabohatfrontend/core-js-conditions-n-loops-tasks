@@ -348,50 +348,39 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
-  // let upper = 0;
-  // let lower = size - 1;
-  // let left = 0;
-  // let right = size - 1;
-  // let i = 0;
-  // let j = 0;
-  // const result = Array.from({ size }, () => []);
-  // let value = 1;
-
-  // while (true) {
-  //   upper += 1;
-  //   if (upper > lower) break;
-
-  //   for (; j < right; j += 1) {
-  //     result[i][j] = value;
-  //     value += 1;
-  //   }
-  //   right -= 1;
-  //   if (right < left) break;
-
-  //   for (; i < lower; i += 1) {
-  //     result[i][j] = value;
-  //     value += 1;
-  //   }
-  //   lower -= 1;
-  //   if (lower < upper) break;
-
-  //   for (; j > left; j -= 1) {
-  //     result[i][j] = value;
-  //     value += 1;
-  //   }
-  //   left += 1;
-  //   if (left > right) break;
-
-  //   for (; i > upper; i -= 1) {
-  //     result[i][j] = value;
-  //     value += 1;
-  //   }
-  // }
-
-  // result[i][j] = value;
-  // return result;
+function getSpiralMatrix(size) {
+  const arr = new Array(size);
+  for (let j = 0; j < size; j += 1) {
+    arr[j] = [];
+  }
+  let row = 0;
+  let col = 0;
+  let rowEnd = size - 1;
+  let colEnd = size - 1;
+  let counter = 1;
+  while (col <= colEnd && row <= rowEnd) {
+    for (let i = col; i <= colEnd; i += 1) {
+      arr[row][i] = counter;
+      counter += 1;
+    }
+    row += 1;
+    for (let i = row; i <= rowEnd; i += 1) {
+      arr[i][colEnd] = counter;
+      counter += 1;
+    }
+    colEnd -= 1;
+    for (let i = colEnd; i >= col; i -= 1) {
+      arr[rowEnd][i] = counter;
+      counter += 1;
+    }
+    rowEnd -= 1;
+    for (let i = rowEnd; i >= row; i -= 1) {
+      arr[i][col] = counter;
+      counter += 1;
+    }
+    col += 1;
+  }
+  return arr;
 }
 
 /**
@@ -409,24 +398,20 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
-  // const leni = matrix.length;
-  // const lenj = matrix[0].length;
-  // const newMatrix = [];
-  // for (let i = 0; i < lenj; i += 1) {
-  //   newMatrix.push([]);
-  // }
-  // for (let i = 0; i < leni; i += 1) {
-  //   for (let j = 0; j < lenj; j += 1) {
-  //     newMatrix[j][leni - 1 - i] = matrix[i][j];
-  //   }
-  // }
-  // return [
-  //   [7, 8, 9],
-  //   [4, 5, 6],
-  //   [1, 2, 3],
-  // ];
+
+function rotateMatrix(matrix) {
+  const leni = matrix.length;
+  const lenj = matrix[0].length;
+  const newMatrix = [];
+  for (let i = 0; i < leni; i += 1) {
+    newMatrix[i] = [...matrix[i]];
+  }
+  for (let i = 0; i < leni; i += 1) {
+    for (let j = 0; j < lenj; j += 1) {
+      matrix[j][leni - 1 - i] = newMatrix[i][j];
+    }
+  }
+  return matrix;
 }
 
 /**
@@ -475,27 +460,14 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  // const len = str.length;
-  // let str1 = str.slice(1, len - 1);
-  // let j = iterations;
-  // let newStr;
-  // let newStr1;
-
-  // while (j) {
-  //   newStr = '';
-  //   newStr1 = '';
-  //   let i = 0;
-  //   while (i < len - 2) {
-  //     newStr += str1[i];
-  //     if (str1[i + 1]) newStr1 += str1[i + 1];
-  //     i += 2;
-  //   }
-  //   str1 = newStr1 + newStr;
-  //   j -= 1;
-  // }
-  // return str[0] + str1 + str[len - 1];
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let newStr = str.substring(1, str.length - 1);
+  while (iterations > 0) {
+    newStr =
+      newStr.replaceAll(/.(.) ?/gm, '$1') + newStr.replaceAll(/(.).?/gm, '$1');
+    iterations -= 1;
+  }
+  return str[0] + newStr + str[str.length - 1];
 }
 
 /**

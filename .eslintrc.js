@@ -21,7 +21,6 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    "no-param-reassign": 0,
   },
   plugins: ['prettier'],
   ignorePatterns: ['extensions/utility.js'],

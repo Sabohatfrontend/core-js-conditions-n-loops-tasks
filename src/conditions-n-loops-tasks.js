@@ -460,14 +460,15 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(str, iterations) {
-  let newStr = str.substring(1, str.length - 1);
-  while (iterations > 0) {
-    newStr =
-      newStr.replaceAll(/.(.) ?/gm, '$1') + newStr.replaceAll(/(.).?/gm, '$1');
-    iterations -= 1;
-  }
-  return str[0] + newStr + str[str.length - 1];
+function shuffleChar(/* str, iterations */) {
+  // let newStr = str.substring(1, str.length - 1);
+  // while (iterations > 0) {
+  //   newStr =
+  //     newStr.replaceAll(/.(.) ?/gm, '$1') + newStr.replaceAll(/(.).?/gm, '$1');
+  //   iterations -= 1;
+  // }
+  // return str[0] + newStr + str[str.length - 1];
+  throw new Error('Not implemented');
 }
 
 /**
